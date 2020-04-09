@@ -81,9 +81,9 @@ class imageHelpers:
         height = height_org * 0.15
         width = width_org * 0.15
 
-        left = left + (width)
-        right = right - (width)
-        top = top + (height)
-        bottom = bottom - (height)
+        left = left + width
+        right = right - width
+        top = top + height
+        bottom = bottom - height
 
         return (left, top, right, bottom, height_org, width_org)

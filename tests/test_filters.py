@@ -1,12 +1,9 @@
-import pytest
 import requests
 from PIL import Image
 
-from falcon import testing
-
 from ..core.app import Filter
-
 from ..core.imageOperation import imageActions
+
 
 class TestValidateFilterRoute:
     def test_call_existing_filter_endpoint(self):
@@ -17,10 +14,10 @@ class TestValidateFilterRoute:
 
         filter = Filter()
 
-        assert filter.validate_route(append) == True
-        assert filter.validate_route(all) == True
-        assert filter.validate_route(is_frontal) == True
-        assert filter.validate_route(laplacian) == True
+        assert filter.validate_route(append) is True
+        assert filter.validate_route(all) is True
+        assert filter.validate_route(is_frontal) is True
+        assert filter.validate_route(laplacian) is True
 
     def test_call_invalid_filter_endpoint(self):
 

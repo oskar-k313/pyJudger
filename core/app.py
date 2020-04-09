@@ -16,7 +16,7 @@ class Filter(object):
         return False
 
     @staticmethod
-    def handleServerError(response, message="Unknown error occurred"):
+    def handle_server_error(response, message="Unknown error occurred"):
         """ Error message handler """
         # TODO logger
         response.media = {"message": message}
@@ -25,13 +25,13 @@ class Filter(object):
     def on_post(self, req, res, route):
         valid_route = self.validate_route(route)
         if not valid_route:
-            self.handleServerError(res, "Invalid route")
+            self.handle_server_error(res, "Invalid route")
             return False
 
         try:
             body = json.loads(req.stream.read())
         except Exception:
-            self.handleServerError(res, "Invalid request body")
+            self.handle_server_error(res, "Invalid request body")
             return False
 
         new_body = main_runner(body, route)

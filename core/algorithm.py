@@ -1,14 +1,13 @@
 import cv2
 import numpy as np
 
-
-#import settings
-
-from ..settings import *
+try:
+    import settings
+except:
+    # pyTest has problem with importing env settings properly
+    from ..settings import *
 
 # All facial landmarks points from shape predictor
-
-
 class Algorithm:
     FACIAL_lANDMARKS = {
         "left_eyebrow": [22, 27],

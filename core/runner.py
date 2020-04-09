@@ -24,6 +24,7 @@ def find_face(img):
 @cached(cache={})
 def load_landmark_modal():
     """ Cache shape predictor so it doesnt have to be loaded each time """
+
     try:
         detector = dlib.get_frontal_face_detector()
         model_location = "./core/models/shape_predictor_5_face_landmarks.dat"
@@ -59,7 +60,8 @@ def is_frontal_runner(image):
 
 
 def main_runner(body, route):
-    """ Extract objects and prepare faces for qualifying"""
+    """ Extract faces and prepare for qualifying """
+
     start = time.time()
 
     img_url = body["url"]
@@ -76,13 +78,13 @@ def main_runner(body, route):
         new_body = body
 
     for index, face in enumerate(faces):
-        # imgHelpers = imageHelpers()
         imgActions = imageActions()
 
         img, img_type = imgActions.crop_image(image_raw, face, img_h, img_w)
 
+        # TODO This has to be solved better
         if route == ROUTER.APPEND.value:
-            obj = new_body["objects"][index]
+            obj = new_body["faces"][index]
             obj[FILTER.LAPLACIAN.value] = laplacian_runner(img, img_type)
             obj[FILTER.ISFRONTAL.value] = is_frontal_runner(img)
 
@@ -101,24 +103,6 @@ def main_runner(body, route):
             filter = {}
             filter[FILTER.ISFRONTAL.value] = is_frontal_runner(img)
             return filter
-
-        # # detection_type = object[REQUEST.TYPE.value]
-        #
-        # if detection_type == OBJECT_TYPE.FACE.value:
-        #
-        #     bounding_box = object[REQUEST.BBOX.value]
-        #
-        #     image_raw = imageActions.get_image(img_url)
-        #     if image_raw is False:
-        #         return False
-        #
-        #     imgHelpers = imageHelpers()
-        #     imgActions = imageActions()
-        #
-        #     bbox_pixel = imgHelpers.convert_bbox_to_pixel(bounding_box, img_h, img_w)
-        #     img, img_type = imgActions.crop_image(image_raw, bbox_pixel)
-        #
-        #     # TODO Need something nicer
 
     end = time.time()
     print("__ TIME __", (end - start))
