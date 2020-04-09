@@ -1,4 +1,4 @@
-from .constants import REQUEST, IMAGE_ADDRESS
+from .constants import REQUEST
 
 
 class inputMessage:

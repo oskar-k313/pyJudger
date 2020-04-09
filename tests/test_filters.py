@@ -4,9 +4,9 @@ from PIL import Image
 
 from falcon import testing
 
-from source.core.app import Filter
+from ..core.app import Filter
 
-from source.core.imageOperation import imageActions
+from ..core.imageOperation import imageActions
 
 class TestValidateFilterRoute:
     def test_call_existing_filter_endpoint(self):
@@ -20,6 +20,7 @@ class TestValidateFilterRoute:
         assert filter.validate_route(append) == True
         assert filter.validate_route(all) == True
         assert filter.validate_route(is_frontal) == True
+        assert filter.validate_route(laplacian) == True
 
     def test_call_invalid_filter_endpoint(self):
 
@@ -42,14 +43,14 @@ class TestValidateFilterRoute:
         response.raw.decode_content = True
         image = Image.open(response.raw)
 
-        coords_large = (0, 0, 200, 200, 228, 203)
-        coords_medium = (0, 0, 70, 70, 100, 100)
-        coords_small = (0, 0, 40, 40, 75, 75)
+        coords_large = (0, 0, 200, 200)
+        coords_medium = (0, 0, 70, 70)
+        coords_small = (0, 0, 40, 40)
 
         imgAction = imageActions()
-        cropped_img, size_large =  imgAction.crop_image(image, coords_large)
-        cropped_img, size_medium =  imgAction.crop_image(image, coords_medium)
-        cropped_img, size_small =  imgAction.crop_image(image, coords_small)
+        cropped_img, size_large =  imgAction.crop_image(image, coords_large, 228, 203)
+        cropped_img, size_medium =  imgAction.crop_image(image, coords_medium, 100, 100)
+        cropped_img, size_small =  imgAction.crop_image(image, coords_small, 75, 75)
 
         assert size_large == 'large'
         assert size_medium == 'medium'

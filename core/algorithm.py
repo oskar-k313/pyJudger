@@ -1,6 +1,10 @@
-import settings
 import cv2
 import numpy as np
+
+
+#import settings
+
+from ..settings import *
 
 # All facial landmarks points from shape predictor
 
