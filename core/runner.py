@@ -62,7 +62,7 @@ def main_runner(body, route):
     """ Extract objects and prepare faces for qualifying"""
     start = time.time()
 
-    img_url = body['url']
+    img_url = body["url"]
     image_raw = imageActions.get_image(img_url)
     if image_raw is False:
         return False
@@ -70,7 +70,6 @@ def main_runner(body, route):
     np_image = imageActions.get_np_img(image_raw)
     faces = find_face(np_image)
     img_h, img_w = np_image.shape[:2]
-
 
     new_body = []
     if route == ROUTER.APPEND.value:
@@ -80,8 +79,7 @@ def main_runner(body, route):
         # imgHelpers = imageHelpers()
         imgActions = imageActions()
 
-        img, img_type = imgActions.crop_image(image_raw, face,
-                                              img_h, img_w)
+        img, img_type = imgActions.crop_image(image_raw, face, img_h, img_w)
 
         if route == ROUTER.APPEND.value:
             obj = new_body["objects"][index]
@@ -104,7 +102,6 @@ def main_runner(body, route):
             filter[FILTER.ISFRONTAL.value] = is_frontal_runner(img)
             return filter
 
-
         # # detection_type = object[REQUEST.TYPE.value]
         #
         # if detection_type == OBJECT_TYPE.FACE.value:
@@ -122,7 +119,6 @@ def main_runner(body, route):
         #     img, img_type = imgActions.crop_image(image_raw, bbox_pixel)
         #
         #     # TODO Need something nicer
-
 
     end = time.time()
     print("__ TIME __", (end - start))

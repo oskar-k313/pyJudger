@@ -33,11 +33,10 @@ class imageActions:
         """ Crop image to object Classify as small large or medium  """
 
         x, y, w, h = coords
-        coordinates = (x,y, (x+w),(y+h))
+        coordinates = (x, y, (x + w), (y + h))
 
         cropped_image = img.crop(coordinates)
         print(coordinates)
-
 
         if (height <= 80) or (width <= 80):
             return (img, IMAGE_SIZE.SMALL.value)
