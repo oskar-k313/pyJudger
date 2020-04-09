@@ -1,7 +1,7 @@
 # PyJudger
 
 
-<img src="https://i.redd.it/pn6uv9w5f0q31.png" width="80%">
+<img src="https://i.redd.it/pn6uv9w5f0q31.png" width="50%">
 
 ##
 
